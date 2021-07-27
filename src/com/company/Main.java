@@ -7,8 +7,17 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        String path = "newfile.txt";
-        ArrayList<String> fileStrings = readFile(path);
+        Scanner sc = new Scanner (System.in);
+        //String path = "newfile.txt";
+        ArrayList<String> fileStrings = new ArrayList<>();
+        while(true) {
+            System.out.println("Введите путь к файлу: ");
+            String path = sc.nextLine();
+            fileStrings = readFile(path);
+            if(fileStrings.size() > 0)
+                break;
+        }
+
 
         // строки без лишних символов, слова разделены одним пробелом
         for(int i = 0; i < fileStrings.size(); ++i) {
@@ -18,7 +27,7 @@ public class Main {
         // Все слова из файла
         ArrayList<String> words = new ArrayList<>();
         for(int i = 0; i < fileStrings.size(); ++i){
-            String[] stringWords = fileStrings.get(1).split(" ");
+            String[] stringWords = fileStrings.get(i).split(" ");
             Collections.addAll(words, stringWords);
         }
 
@@ -93,7 +102,7 @@ public class Main {
                 fileStrs.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         fileStrs.removeAll(Collections.singleton(null));
         return fileStrs;
